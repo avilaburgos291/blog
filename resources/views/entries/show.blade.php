@@ -21,6 +21,14 @@
                         {{ __('Edit entry') }}
                         </a>
                     @endif
+
+                    @can('update', $entry)
+                    <hr>
+                    <a href="{{ url('/entries/'.$entry->id.'/edit') }}" class="btn btn-primary">
+                        {{ __('Edit entry') }}
+                        </a>
+                    @endcan
+
                 </div>
             </div>
         </div>
