@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-footer">
                         {{ __('Author') }}:
-                        <a href="{{ url('users/'.$entry->user_id) }}"> {{ $entry->user->name }} </a>
+                        <a href="{{ url('@'.$entry->user->username) }}"> {{ $entry->user->name }} </a>
                     </div>
                 </div>
             @endforeach
