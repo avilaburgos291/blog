@@ -17,9 +17,12 @@ class CreateEntriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
+
             //Datos de author de cada entrada :)
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            //Se adiciona campo de Slug: direcciones amigables :)
+            $table->string('slug');
 
             $table->timestamps();
         });

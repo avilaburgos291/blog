@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Exceptions;
+//Se adiciona clase de la excepcion :)
+use App\Exceptions\InvalidEntrySlugException;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        //Se modifica el tratamiendo de las excepciones por defecto adicionando el tratamiento para la excepcion desarrollada :)
+        if ($exception instanceof InvalidEntrySlugException ) {
+            //Se reenvia a la pagina de inicio :)
+            //return redirect('/');
+            //Se crea funcionalidad para dirreccionar a la ruta correcta :)
+            //Se hace uso de la creación de un metodo para direccionar la informacion :)
+            return $exception->render();
+        }
         return parent::render($request, $exception);
     }
 }

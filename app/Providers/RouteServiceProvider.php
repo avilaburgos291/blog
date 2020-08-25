@@ -2,8 +2,14 @@
 
 namespace App\Providers;
 
+
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+//Se adiciona clase de entradas :)
+use App\Entry;
+//Se adiciona clase de la excepcion :)
+use App\Exceptions\InvalidEntrySlugException;
+
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,9 +36,33 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        //Configurando nuestro propio Routes ServiceProvider :)
+        //Nuestro propio metodo de resolución de peticiones :)
         parent::boot();
+        //se adiciona nombre de la varibale dada en la ruta para visitantes para evitar conflicto con las rutas internas de edición por lo cual se recibe con el nombre dado en la ruta como : entryBySlug.
+        Route::bind('entryBySlug', function ($value) {
+            //Se obtienen las partes de la ruta recibida para las entradas :)
+            $parts = explode('-',$value);
+            //Se obtiene el ultimo espacio en el vector  :)
+            $id = end($parts);
+            //Se intenta buscar una entrada en base al id obtenido :)
+            //return Entry::findOrFail($id);
+            //Ahora si se encuentra el objeto buscado se obtinene la información del mismo :)
+            $entry = Entry::findOrFail($id);
+            //Se valida la información del parametro enviado frentre a la informacion del objeto :)
+            if ($entry->slug.'-'.$entry->id === $value) {
+                return $entry;
+            }else{
+                //Encaso de coincidir la ruta seleccionada :)
+                //Creamos una prueba frente a la excepcion :)
+                //throw new Exception("Error Processing Request", 1);
+                //Entonces se pasa como parametro el objeto de la clase encontrada :)
+                throw new InvalidEntrySlugException($entry);
+            }
+
+            //Este seria el metodo por defecto :)
+            //return Entry::where('name', $value)->firstOrFail();
+        });
     }
 
     /**

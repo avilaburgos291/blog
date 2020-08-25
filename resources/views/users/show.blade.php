@@ -23,7 +23,9 @@
                     <ul>
                         @foreach($entries as $entry)
                             <li>
-                                <a href="{{ url('entries/'.$entry->id) }}">{{ $entry->title }}</a>
+                                <!-- Se modifica para obetenr la ruta desde el modelo :)
+                                <a href="{{ url('entries/'.$entry->slug.'-'.$entry->id) }}">{{ $entry->title }}</a>-->
+                                <a href="{{ $entry->getUrl() }}">{{ $entry->title }}</a>
                             </li>
                         @endforeach
                     </ul>
