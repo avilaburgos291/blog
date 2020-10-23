@@ -14,12 +14,12 @@
                         </div>
                     @endif
 
-                    @if ($entries->isEmpty())
-                        <p>{{ __("You didn't publish any entry yet." ) }}</p>
+                    @if ($universities->isEmpty())
+                        <p>{{ __("You didn't publish any university yet." ) }}</p>
                     @else
-                        <p>{{ __('My entries') }}</p>
+                        <p>{{ __('Universities') }}</p>
                         <ul>
-                            @foreach($entries as $entry)
+                            @foreach($universities as $entry)
                                 <li>
                                     <a href="{{ $entry->getUrl() }}">{{ $entry->title }}</a>
                                 </li>

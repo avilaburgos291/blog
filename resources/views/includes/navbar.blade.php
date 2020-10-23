@@ -11,10 +11,10 @@
         @endif
     @else
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('entires.create') }}"> New entry </a>
+            <a class="nav-link" href="{{ route('universities.create') }}"> New university </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}"> My entries </a>
+            <a class="nav-link" href="{{ route('home') }}"> Universities </a>
         </li>
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

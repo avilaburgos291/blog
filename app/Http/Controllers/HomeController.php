@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Entry;
+use App\University;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         //Se obtienen las entradas de cada usuario :)
-        $entries = Entry::where('user_id', auth()->id())->get();
-        return view('home', compact('entries'));
+        $universities = University::where('user_id', auth()->id())->get();
+        return view('home', compact('universities'));
     }
 }
