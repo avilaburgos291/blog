@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">New University</div>
+                <div class="card-header">Edit Course</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,12 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <form action="{{ route('universities.store') }}" method="POST">
+                    <form action="{{ url('courses/'.$course->id) }}" method="POST">
+                        @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="title">{{ __('title') }}</label>
-                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                            <label for="title">{{ __('Title') }}</label>
+                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                            value="{{ old('title', $course->title) }}"
+                            required autocomplete="title" autofocus>
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,8 +28,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="description">{{ __('description') }}</label>
-                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ old('description') }}</textarea>
+                            <label for="description">{{ __('Description') }}</label>
+                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ old('description', $course->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,7 +37,7 @@
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Publish') }}
+                            {{ __('Save changes') }}
                         </button>
                     </form>
                 </div>

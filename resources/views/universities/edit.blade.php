@@ -17,11 +17,11 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="name">{{ __('Name') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name', $university->name) }}"
-                            required autocomplete="name" autofocus>
-                            @error('name')
+                            <label for="title">{{ __('title') }}</label>
+                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                            value="{{ old('title', $university->title) }}"
+                            required autocomplete="title" autofocus>
+                            @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

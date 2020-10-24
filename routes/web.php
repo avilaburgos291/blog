@@ -12,22 +12,22 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/entries/create', 'EntryController@create')->name('entires.create');
-Route::post('/entries', 'EntryController@store')->name('entires.store');
-//Para que todos los usuarios puedan ver los post :)
-Route::get('/entries/{entryBySlug}', 'GuestController@show')->name('entires.show');
-
-Route::get('/entries/{entry}/edit', 'EntryController@edit')->name('entires.edit');
-Route::put('/entries/{entry}', 'EntryController@update')->name('entires.update');
 
 //Rutas de university.
 Route::get('/universities/create', 'UniversityController@create')->name('universities.create');
 Route::post('/universities', 'UniversityController@store')->name('universities.store');
 //Para que todos los usuarios puedan ver los post :)
-Route::get('/universities/{entryBySlug}', 'GuestController@show')->name('universities.show');
+Route::get('/universities/{universityBySlug}', 'GuestController@show')->name('universities.show');
 
-Route::get('/universities/{entry}/edit', 'UniversityController@edit')->name('universities.edit');
-Route::put('/universities/{entry}', 'UniversityController@update')->name('universities.update');
+Route::get('/universities/{university}/edit', 'UniversityController@edit')->name('universities.edit');
+Route::put('/universities/{university}', 'UniversityController@update')->name('universities.update');
+
+//Rutas de course.
+Route::get('/courses', 'CourseController@index')->name('courses.index');
+Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+Route::post('/courses', 'CourseController@store')->name('courses.store');
+Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edit');
+Route::put('/courses/{course}', 'CourseController@update')->name('courses.update');
 
 //Funcionalidad para obtener la información del usuario :)
 //Route::get('/users/{user}', 'UserController@show')->name('users.show');

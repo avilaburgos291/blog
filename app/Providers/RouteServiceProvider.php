@@ -7,8 +7,10 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Route;
 //Se adiciona clase de entradas :)
 use App\Entry;
+use App\University;
 //Se adiciona clase de la excepcion :)
 use App\Exceptions\InvalidEntrySlugException;
+use App\Exceptions\InvalidUniversitySlugException;
 
 
 class RouteServiceProvider extends ServiceProvider
@@ -40,28 +42,53 @@ class RouteServiceProvider extends ServiceProvider
         //Nuestro propio metodo de resolución de peticiones :)
         parent::boot();
         //se adiciona nombre de la varibale dada en la ruta para visitantes para evitar conflicto con las rutas internas de edición por lo cual se recibe con el nombre dado en la ruta como : entryBySlug.
-        Route::bind('entryBySlug', function ($value) {
+        Route::bind('universityBySlug', function ($value) {
             //Se obtienen las partes de la ruta recibida para las entradas :)
             $parts = explode('-',$value);
             //Se obtiene el ultimo espacio en el vector  :)
             $id = end($parts);
             //Se intenta buscar una entrada en base al id obtenido :)
-            //return Entry::findOrFail($id);
+            //return University::findOrFail($id);
             //Ahora si se encuentra el objeto buscado se obtinene la información del mismo :)
-            $entry = Entry::findOrFail($id);
+            $university = University::findOrFail($id);
             //Se valida la información del parametro enviado frentre a la informacion del objeto :)
-            if ($entry->slug.'-'.$entry->id === $value) {
-                return $entry;
+            if ($university->slug.'-'.$university->id === $value) {
+                return $university;
             }else{
                 //Encaso de coincidir la ruta seleccionada :)
                 //Creamos una prueba frente a la excepcion :)
                 //throw new Exception("Error Processing Request", 1);
                 //Entonces se pasa como parametro el objeto de la clase encontrada :)
-                throw new InvalidEntrySlugException($entry);
+                throw new InvalidUniversitySlugException($university);
             }
 
             //Este seria el metodo por defecto :)
-            //return Entry::where('name', $value)->firstOrFail();
+            //return University::where('name', $value)->firstOrFail();
+        });
+
+        //se adiciona nombre de la varibale dada en la ruta para visitantes para evitar conflicto con las rutas internas de edición por lo cual se recibe con el nombre dado en la ruta como : entryBySlug.
+        Route::bind('courseBySlug', function ($value) {
+            //Se obtienen las partes de la ruta recibida para las entradas :)
+            $parts = explode('-',$value);
+            //Se obtiene el ultimo espacio en el vector  :)
+            $id = end($parts);
+            //Se intenta buscar una entrada en base al id obtenido :)
+            //return Course::findOrFail($id);
+            //Ahora si se encuentra el objeto buscado se obtinene la información del mismo :)
+            $course = Course::findOrFail($id);
+            //Se valida la información del parametro enviado frentre a la informacion del objeto :)
+            if ($course->slug.'-'.$course->id === $value) {
+                return $course;
+            }else{
+                //Encaso de coincidir la ruta seleccionada :)
+                //Creamos una prueba frente a la excepcion :)
+                //throw new Exception("Error Processing Request", 1);
+                //Entonces se pasa como parametro el objeto de la clase encontrada :)
+                throw new InvalidCourseSlugException($course);
+            }
+
+            //Este seria el metodo por defecto :)
+            //return course::where('name', $value)->firstOrFail();
         });
     }
 
