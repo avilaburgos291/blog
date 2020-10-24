@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">New Semester</div>
 
@@ -52,15 +52,18 @@
                                         <option value="{{$course->id}}" 
                                             @if( (int) $course->id === (int) old('course_id')) selected='selected' 
                                             @endif
-                                        > {{$course->code}} - {{$course->title}} </option> 
+                                        > {{$course->code}} - {{$course->title}} ({{$course->university->title}})</option> 
                                     @endforeach
                                 @endif
-                            </select>
+                            </select>                            
                             @error('course')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="price">{{ __('The price of for the semester will be generated randomly') }}</label>
                         </div>     
 
                         <button type="submit" class="btn btn-primary">

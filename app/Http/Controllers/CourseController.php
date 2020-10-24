@@ -19,7 +19,11 @@ class CourseController extends Controller
     {
         $courses_totales = DB::table('courses')
                 ->join('semesters', 'courses.id', '=', 'semesters.course_id')
-                ->select('courses.id as course_id','courses.*', DB::raw('SUM(semesters.price) as price_total_cuorse'))
+                ->select(
+                    'courses.id as course_id',
+                    'courses.*', DB::raw('SUM(semesters.price) as price_total_cuorse'),
+                    DB::raw('AVG(semesters.price) as price_avg_cuorse')
+                    )
                 ->groupBy('courses.id')
                 ->havingRaw('SUM(semesters.price) > ?', [0])
                 ->paginate(10);

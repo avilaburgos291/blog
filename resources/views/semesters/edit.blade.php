@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Edit Semester</div>
 
@@ -56,7 +56,7 @@
                                         <option value="{{$course->id}}" 
                                             @if( (int) $course->id === (int) $semester->course_id) selected='selected' 
                                             @endif
-                                        > {{$course->title}} </option> 
+                                        > {{$course->code}} - {{$course->title}} ({{$course->university->title}}) </option> 
                                     @endforeach
                                 @endif
                             </select>

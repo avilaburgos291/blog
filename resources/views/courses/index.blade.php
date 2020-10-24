@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Courses') }}
+                <div class="card-header d-flex justify-content-between ">{{ __('Courses') }}
                     <a class="btn btn-info" href="{{ route('courses.create') }}"> New Course </a>
                 </div>
 
@@ -19,23 +19,33 @@
                     @if ($courses->isEmpty())
                         <p>{{ __("You didn't create any university yet." ) }}</p>
                     @else
-                        <p>{{ __('Courses') }}</p>
-                        <ul>
+                        <ul class="list-group"> 
                             
                             @foreach($courses as $course)
                                 @if (!$courses_totales->isEmpty())
                                     @foreach($courses_totales as $course_total)
                                         @if ($course_total->course_id == $course->id)
-                                            <li>
-                                                <a href="{{ $course->getUrl() }}">{{ $course->code }} - {{ $course->title }} 
-                                                    Investment: ${{ number_format($course_total->price_total_cuorse, 2, ',', '.') }}
-                                                </a>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <h5>
+                                                    <a href="{{ $course->getUrl() }}">
+                                                        {{ $course->code }} - {{ $course->title }} 
+                                                        ({{ $course->university->title }})
+                                                    </a>
+                                                </h5>
+                                                <h5><span class="badge badge-info">
+                                                    <b>Investment: ${{ number_format($course_total->price_total_cuorse, 2, ',', '.') }}
+                                                    </b>
+                                                    </span>
+                                                    <span class="badge badge-info">
+                                                        Average cost per semester: ${{ number_format($course_total->price_avg_cuorse, 2, ',', '.') }} 
+                                                    </span>
+                                                </h5>
                                             </li>
-                                            <ul>
+                                            <ul class="list-group"> 
                                             @if (!$semesters->isEmpty())
                                                 @foreach($semesters as $semester)
                                                     @if ($semester->course_id == $course->id)
-                                                        <li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
                                                             <a href="{{ $semester->getUrl() }}">{{ $semester->code }} - {{ $semester->title }} 
                                                                 Price: ${{ number_format($semester->price, 2, ',', '.') }}
                                                             </a>

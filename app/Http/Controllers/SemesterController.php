@@ -17,8 +17,9 @@ class SemesterController extends Controller
     {
         //Se obtienen las entradas de cada usuario :)
         //$semesters = Semester::where('user_id', auth()->id())->get();
-        $semesters = Semester::orderByDesc('created_at')
-    	->orderByDesc('id')
+        $semesters = Semester::orderBy('course_id')
+        ->orderBy('id')
+    	->orderBy('created_at')
     	->paginate(10);
         return view('semesters.index', compact('semesters'));
     }
@@ -35,7 +36,7 @@ class SemesterController extends Controller
     public function create()
     {
         //Se obtienen las entradas del usuario :)
-        $courses = Course::select('id', 'title')->get(); 
+        $courses = Course::get(); 
         return view('semesters.create',  compact('courses'));
     	//return view('semesters.create');
     }
@@ -71,7 +72,7 @@ class SemesterController extends Controller
         }*/
         //Se adiciona validacion de permisos :)
         //Se hace uso de la funcionalidad de autorizacion :)
-        $courses = Course::select('id', 'title')->get();
+        $courses = Course::get(); 
         $this->authorize('update', $semester);
         return view('semesters.edit',  compact('semester', 'courses'));
     }

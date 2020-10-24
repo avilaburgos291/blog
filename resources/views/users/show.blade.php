@@ -3,13 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Tweets</div>
-                <div class="card-body">
-                </div>
-            </div>
-        </div>
+        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ $user->name }}</div>
@@ -21,11 +15,11 @@
                     @endif
                     <p>{{ __('Published entries') }}</p>
                     <ul>
-                        @foreach($entries as $entry)
+                        @foreach($universities as $university)
                             <li>
                                 <!-- Se modifica para obetenr la ruta desde el modelo :)
-                                <a href="{{ url('entries/'.$entry->slug.'-'.$entry->id) }}">{{ $entry->title }}</a>-->
-                                <a href="{{ $entry->getUrl() }}">{{ $entry->title }}</a>
+                                <a href="{{ url('entries/'.$university->slug.'-'.$university->id) }}">{{ $university->title }}</a>-->
+                                <a href="{{ $university->getUrl() }}">{{ $university->title }}</a>
                             </li>
                         @endforeach
                     </ul>
