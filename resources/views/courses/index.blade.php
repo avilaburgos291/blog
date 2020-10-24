@@ -17,14 +17,37 @@
                     @endif
 
                     @if ($courses->isEmpty())
-                        <p>{{ __("You didn't publish any university yet." ) }}</p>
+                        <p>{{ __("You didn't create any university yet." ) }}</p>
                     @else
                         <p>{{ __('Courses') }}</p>
                         <ul>
+                            
                             @foreach($courses as $course)
-                                <li>
-                                    <a href="{{ $course->getUrl() }}">{{ $course->title }}</a>
-                                </li>
+                                @if (!$courses_totales->isEmpty())
+                                    @foreach($courses_totales as $course_total)
+                                        @if ($course_total->course_id == $course->id)
+                                            <li>
+                                                <a href="{{ $course->getUrl() }}">{{ $course->code }} - {{ $course->title }} 
+                                                    Investment: ${{ number_format($course_total->price_total_cuorse, 2, ',', '.') }}
+                                                </a>
+                                            </li>
+                                            <ul>
+                                            @if (!$semesters->isEmpty())
+                                                @foreach($semesters as $semester)
+                                                    @if ($semester->course_id == $course->id)
+                                                        <li>
+                                                            <a href="{{ $semester->getUrl() }}">{{ $semester->code }} - {{ $semester->title }} 
+                                                                Price: ${{ number_format($semester->price, 2, ',', '.') }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            </ul>
+                                        @endif
+                                    @endforeach
+                                @endif
+                                
                             @endforeach
                     </ul>
                     @endif

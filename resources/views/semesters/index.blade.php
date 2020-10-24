@@ -17,16 +17,18 @@
                     @endif
 
                     @if ($semesters->isEmpty())
-                        <p>{{ __("You didn't publish any semesters yet." ) }}</p>
+                        <p>{{ __("You didn't create any semesters yet." ) }}</p>
                     @else
                         <p>{{ __('Semesters') }}</p>
                         <ul>
                             @foreach($semesters as $semester)
                                 <li>
-                                    <a href="{{ $semester->getUrl() }}">{{ $semester->title }}</a>
+                                    <a href="{{ $semester->getUrl() }}">{{ $semester->course->code }} - {{ $semester->course->title }} 
+                                        <b> {{ $semester->code }} - {{ $semester->title }} ${{ $semester->price }}</b>
+                                    </a>
                                 </li>
                             @endforeach
-                    </ul>
+                        </ul>
                     @endif
                 </div>
             </div>

@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Route;
 //Se adiciona clase de entradas :)
 use App\Entry;
 use App\University;
+use App\Course;
+use App\Semester;
 //Se adiciona clase de la excepcion :)
 use App\Exceptions\InvalidEntrySlugException;
 use App\Exceptions\InvalidUniversitySlugException;
+use App\Exceptions\InvalidCourseSlugException;
+use App\Exceptions\InvalidSemesterSlugException;
 
 
 class RouteServiceProvider extends ServiceProvider
@@ -85,6 +89,31 @@ class RouteServiceProvider extends ServiceProvider
                 //throw new Exception("Error Processing Request", 1);
                 //Entonces se pasa como parametro el objeto de la clase encontrada :)
                 throw new InvalidCourseSlugException($course);
+            }
+
+            //Este seria el metodo por defecto :)
+            //return course::where('name', $value)->firstOrFail();
+        });
+
+        //se adiciona nombre de la varibale dada en la ruta para visitantes para evitar conflicto con las rutas internas de edición por lo cual se recibe con el nombre dado en la ruta como : entryBySlug.
+        Route::bind('semesterBySlug', function ($value) {
+            //Se obtienen las partes de la ruta recibida para las entradas :)
+            $parts = explode('-',$value);
+            //Se obtiene el ultimo espacio en el vector  :)
+            $id = end($parts);
+            //Se intenta buscar una entrada en base al id obtenido :)
+            //return Semester::findOrFail($id);
+            //Ahora si se encuentra el objeto buscado se obtinene la información del mismo :)
+            $semester = Semester::findOrFail($id);
+            //Se valida la información del parametro enviado frentre a la informacion del objeto :)
+            if ($semester->slug.'-'.$semester->id === $value) {
+                return $semester;
+            }else{
+                //Encaso de coincidir la ruta seleccionada :)
+                //Creamos una prueba frente a la excepcion :)
+                //throw new Exception("Error Processing Request", 1);
+                //Entonces se pasa como parametro el objeto de la clase encontrada :)
+                throw new InvalidsemesterSlugException($semester);
             }
 
             //Este seria el metodo por defecto :)

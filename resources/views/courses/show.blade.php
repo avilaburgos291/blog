@@ -15,16 +15,11 @@
                     @endif
                     {{ $course->description }}
 
-                    @if( $course->user_id === auth()->id())
-                    <hr>
-                    <a href="{{ url('/entries/'.$course->id.'/edit') }}" class="btn btn-primary">
-                        {{ __('Edit course') }}
-                        </a>
-                    @endif
+                    
 
                     @can('update', $course)
                     <hr>
-                    <a href="{{ url('/entries/'.$course->id.'/edit') }}" class="btn btn-primary">
+                    <a href="{{ url('/courses/'.$course->id.'/edit') }}" class="btn btn-primary">
                         {{ __('Edit course') }}
                         </a>
                     @endcan

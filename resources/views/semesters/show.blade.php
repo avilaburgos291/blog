@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $semester->title }}</div>
+                <div class="card-header">{{ $semester->title }} - ${{ $semester->price }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,13 +14,6 @@
                         </div>
                     @endif
                     {{ $semester->description }}
-
-                    @if( $semester->user_id === auth()->id())
-                    <hr>
-                    <a href="{{ url('/semesters/'.$semester->id.'/edit') }}" class="btn btn-primary">
-                        {{ __('Edit semester') }}
-                        </a>
-                    @endif
 
                     @can('update', $semester)
                     <hr>

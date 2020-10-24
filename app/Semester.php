@@ -33,6 +33,6 @@ class Semester extends Model
 
 	public function getUrl(){
 		//Se devulve el resultado de la combinación del slug con el id :)
-		return url("courses/$this->slug-$this->id");
+		return url("semesters/$this->slug-$this->id");
 	}
 }

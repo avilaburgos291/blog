@@ -48,16 +48,24 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="price">{{ __('Price') }}</label>
-                            <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price"
-                            value="{{ old('price', $semester->price) }}"
-                            required autocomplete="price" autofocus>
-                            @error('price')
+                            <label for="course_id">{{ __('Course') }}</label>
+                            <select id="course_id" class="form-control @error('course_id') is-invalid @enderror" name="course_id" required>
+                                <option value="">Seleccione...</option>
+                                @if (!$courses->isEmpty())
+                                    @foreach($courses as $course) 
+                                        <option value="{{$course->id}}" 
+                                            @if( (int) $course->id === (int) $semester->course_id) selected='selected' 
+                                            @endif
+                                        > {{$course->title}} </option> 
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('course_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> 
                         <button type="submit" class="btn btn-primary">
                             {{ __('Save changes') }}
                         </button>
